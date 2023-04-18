@@ -1,0 +1,230 @@
+---
+title: Penguins are amazing
+author:
+  - name: Penguin B. Fan
+    affil: 1,2,\ddagger,*
+    orcid: 0000-0003-3293-2315
+  - name: Another P. Fan
+    affil: 2, \dagger, \ddagger
+affiliation:
+  - num: 1
+    address: |
+      Antarctic University - 
+      Antarctica
+    email: leutnant@fh-muenster.de
+  - num: 2
+    address: |
+      Snow Institute
+      Close to Antarctica
+    email: penguins@antarctica.com
+# firstnote to eighthnote
+firstnote: |
+  Current address: Arctic University
+secondnote: |
+  These authors contributed equally to this work.
+correspondence: |
+  p.b.fan@antarctica.com; Tel.: +XX-000-00-0000.
+journal: water
+type: article
+status: submit
+bibliography: mybibfile.bib
+appendix: appendix.tex
+simplesummary: |
+ Penguins are super cool
+abstract: |
+ Penguins are a group of flightless birds that are highly adapted to living in the harsh environments of the Southern Ocean. However,  these iconic animals are facing numerous threats, including climate change, which is altering their habitats and affecting their      survival. In this study, we assessed the impact of climate change on penguin populations by analyzing long-term data on penguin       abundance, distribution, and breeding success. Our results show that changes in sea ice extent and ocean temperature have had a       significant impact on the distribution and abundance of penguin populations, with some species experiencing declines in population    size and reproductive success. These findings highlight the vulnerability of penguins to climate change and the urgent need for       conservation efforts to protect these charismatic and important species. We suggest that future research should focus on developing   effective management strategies to mitigate the impacts of climate change on penguin populations and their habitats.
+keywords: |
+ Penguins; Cold; Antarctica.
+acknowledgement: |
+  Funded by Penguin Studies Foundation. Thanks to penguins.
+  
+authorcontributions: |
+  The First author decided on the cutenuss of penguins and why they should be studied. The second author agreed, measuered and weighed   some penguins, basically did all the work.
+conflictsofinterest: |
+  There is no conflict of interest
+sampleavailability: |
+  Samples of the compounds ...... are available from the authors.
+abbreviations:
+  - short: MDPI
+    long: Multidisciplinary Digital Publishing Institute
+  - short: DOAJ
+    long: Directory of open access journals
+  - short: TLA
+    long: Three letter acronym
+  - short: LD 
+    long: linear dichroism
+output: rticles::mdpi_article
+---
+
+# Version
+
+This Rmd-skeleton uses the mdpi Latex template published 2019/02. 
+However, the official template gets more frequently updated than the 'rticles'
+package. Therefore, please make sure prior to paper submission, that you're 
+using the most recent .cls, .tex and .bst files 
+(available [here](http://www.mdpi.com/authors/latex)).
+
+# Introduction
+
+Penguins are awesome. They are birds but too cool to fly, so they rather swim. You can find a nice reference to what just said here [@https://doi.org/10.1002/ecs2.4417] and here [@leutnant_stormwater_2016].
+
+
+# Materials and Methods
+
+We collected data on three morphological traits of penguins: body mass, flipper length, and bill length. We measured these traits in a total of 200 individual penguins from three different species: Adelie, Gentoo, and Chinstrap.
+
+```{r penguin stuff, echo = FALSE}
+
+library(palmerpenguins)
+data(package = 'palmerpenguins')
+
+str(penguins)
+# this is our data set
+
+# let's analyze the data
+
+library(tidyverse)
+library(ggplot2)
+# summarize them
+penguins %>% 
+        count(species)
+
+# exclude NAs
+
+penguins <- na.omit(penguins)
+
+
+# mutate the dataset
+# let's calculate the ratio between body mass and flipper length and bill length and bill depth
+
+penguins <- penguins %>% 
+                mutate(fl_b_ratio = flipper_length_mm / body_mass_g,
+                       bill_length_depth = bill_length_mm / bill_depth_mm)
+
+penguins
+# let's visualize the data
+
+# let's plot species vs body mass color coded by sex
+
+penguin_weight <- ggplot( data = penguins, aes( x = species, y = body_mass_g, color = sex)) +
+          geom_point() +
+  scale_color_manual(values = c("yellow","purple")) +
+  labs(x = "Species",
+       y = "Body mass (g)",
+       title = "Penguin species weight")
+penguin_weight
+
+# let's plot bill length vs depth
+
+bill_len_dep <- ggplot(data = penguins, aes(x = bill_length_mm, y = bill_depth_mm, group = species)) +
+  geom_point(aes(color = species, shape = sex), size = 3, alpha = 0.8) +
+  #geom_smooth(method = "lm", se = FALSE, aes(color = species)) +
+  scale_color_manual(values = c("darkorange","purple","cyan4")) +
+  labs(title = "Penguin bill dimensions",
+       subtitle = "Bill length and depth for Adelie, Chinstrap and Gentoo Penguins at Palmer Station LTER",
+       x = "Bill length (mm)",
+       y = "Bill depth (mm)",
+       color = "Penguin species",
+       shape = "Penguin species") +
+  theme(legend.position = c(0.85, 0.15),
+        plot.title.position = "plot",
+        plot.caption = element_text(hjust = 0, face= "italic"),
+        plot.caption.position = "plot")
+bill_len_dep
+
+# let's compare the flipper length distribution between the different species
+
+flipper_hist <- ggplot(data = penguins, aes(x = flipper_length_mm)) +
+  geom_histogram(aes(fill = species), 
+                 alpha = 0.5, 
+                 position = "identity") +
+  scale_fill_manual(values = c("darkorange","purple","cyan4")) +
+  labs(x = "Flipper length (mm)",
+       y = "Frequency",
+       title = "Penguin flipper lengths")
+flipper_hist
+
+
+```
+
+
+# Results
+
+Our data show significant differences in body mass, flipper length, and bill length among the three penguin species. Adelie penguins were found to be the smallest in body mass, flipper length, and bill length, while Chinstrap penguins were the largest in these traits. Gentoo penguins were intermediate in size for all three traits.
+
+## Differences between species
+
+Different species are quite different
+
+### Species 1
+
+This is the biggest species. They are
+
+* largest
+* heaviest
+* cutest
+
+This is what makes them cute
+
+1. The tiny baby penguins
+2. They cuddle up
+3. They get tired of walking and float on their bellies.
+
+The text continues here.
+
+All figures and tables should be cited in the main text as Figure 1, Table 1, etc.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=3 cm]{logo-mdpi}
+\caption{This is a figure, Schemes follow the same formatting. If there are multiple panels, they should be listed as: (\textbf{a}) Description of what is contained in the first panel. (\textbf{b}) Description of what is contained in the second panel. Figures should be placed in the main text near to the first time they are cited. A caption on a single line should be centered.}
+\end{figure}
+
+
+\begin{table}[H]
+\caption{This is a table caption. Tables should be placed in the main text near to the first time they are cited.}
+\centering
+%% \tablesize{} %% You can specify the fontsize here, e.g.  \tablesize{\footnotesize}. If commented out \small will be used.
+\begin{tabular}{ccc}
+\toprule
+\textbf{Title 1}	& \textbf{Title 2}	& \textbf{Title 3}\\
+\midrule
+entry 1		& data			& data\\
+entry 2		& data			& data\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+This is an example of an equation:
+
+\begin{equation}
+\mathbb{S}
+\end{equation}
+<!-- If the documentclass option "submit" is chosen, please insert a blank line before and after any math environment (equation and eqnarray environments). This ensures correct linenumbering. The blank line should be removed when the documentclass option is changed to "accept" because the text following an equation should not be a new paragraph. -->
+
+<!-- Please punctuate equations as regular text. Theorem-type environments (including propositions, lemmas, corollaries etc.) can be formatted as follows: -->
+Example of a theorem:
+\begin{Theorem}
+Example text of a theorem.
+\end{Theorem}
+
+The text continues here. Proofs must be formatted as follows:
+
+Example of a proof:
+\begin{proof}[Proof of Theorem 1]
+Text of the proof. Note that the phrase `of Theorem 1' is optional if it is clear which theorem is being referred to.
+\end{proof}
+The text continues here.
+
+# Discussion
+
+Our findings suggest that the observed differences in penguin morphological traits may be related to differences in foraging behavior and habitat use among the species. Adelie penguins, for example, feed primarily on krill, which may require a smaller body size and bill length for efficient feeding. Chinstrap penguins, on the other hand, feed on a more diverse range of prey, including fish and krill, which may explain their larger size and longer bill length. Our study highlights the importance of considering species-specific adaptations and behaviors when studying penguin morphology and ecology.
+ 
+
+# Conclusion
+
+Penguins are awesome. 
+
+# Patents
+
+This patent is that we are the first to find out how cute pengunis are.

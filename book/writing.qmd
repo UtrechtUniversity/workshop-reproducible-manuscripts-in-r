@@ -1,0 +1,127 @@
+# Writing
+
+The body of the document is where you will do your writing, which will primarily be in the [Markdown](https://daringfireball.net/projects/markdown/syntax) format (LaTeX and HTML would also work, depending on the output format).
+
+## Markdown Syntax
+
+If you're not familiar with Markdown, you can familiarize yourself with it in a couple of minutes using the following link: [https://learnxinyminutes.com/docs/markdown/](https://learnxinyminutes.com/docs/markdown/).
+
+Additionally, you can use the [Visual Editor](https://rstudio.github.io/visual-markdown-editing/) option in RStudio to see Markdown syntax previewed in it's final format as you write. 
+
+Some things you can do with Markdown:
+
+- Headings can be created for sections and subsections using the `#` hashtag character. So `# Heading 1` for a top-level heading and `## Heading 2` for a second-level heading and so on. 
+
+- Text can be formatted in *italic* or **bold** using the `*` asterisk character.
+
+- Bullet point lists can be created with a `-` hyphen or `*` asterisk for each line in the list.
+
+- Links can be embedded by writing in the following way: [insert text which should be hyperlinked](insert link to website)
+
+- Plain code can be embedded in text using the ``` backtick character. R code can be embedded as well, but we will cover that in the next section.
+
+## Rendering
+
+You can render the R Markdown document to it's specified output format using the _Knit_ button in RStudio's editor toolbar.
+
+You can also use the `render` function documented in the following page: [https://pkgs.rstudio.com/rmarkdown/reference/render.html](https://pkgs.rstudio.com/rmarkdown/reference/render.html)
+
+## Output Formats & Options
+
+R Markdown enables numerous output formats, of which the most relevant are:
+
+- pdf_document
+
+- html_document
+
+- word_document
+
+The output formats can be specified in the YAML header. If using a template from the `rticles` package, it will be automatically specified.
+
+In a reproducible project, the human-generated content (manuscript) is kept separate from the project-generated content (result). Adding the code below to the end of your YAML header will ensure that your R Markdown document is rendered to the results folder. 
+
+```{r}
+#| eval: false
+knit: (function(input, ...) {
+    rmarkdown::render(
+      input,
+      output_dir = "../../results"
+    )
+  })
+```
+
+Moreover, it is possible to specify multiple output formats for simulatenous rendering:
+
+- The code chunk below specifies the MDPI article and a Word document as the output formats.
+
+```{r}
+#| eval: false
+output: 
+  rticles::mdpi_article: default 
+  word_document: default
+knit: (function(input, ...) {
+    rmarkdown::render(
+      input,
+      output_format = "all",
+      output_dir = "../../results/output"
+    )
+  })
+```
+
+- The code chunk below specifies R Markdown's default pdf & Word documents as the output formats. 
+
+```{r}
+#| eval: false
+output: 
+  pdf_document: default 
+  word_document: default
+knit: (function(input, ...) {
+    rmarkdown::render(
+      input,
+      output_format = "all",
+      output_dir = "../../results/output"
+    )
+  })
+```
+
+### Exercise
+
+Since we don't have time to write a whole manuscript from scratch, we have prepared some text that you can use to build up a dummy manuscript.
+
+- Copy the text below and paste it into the right location(s) in your R Markdown document. Where necessary, clean up the original template by removing redundant text and formatting.
+
+- Try using Markdown syntax to: 
+
+    - format your manuscript with appropriate sections and subsections (headers), 
+
+    - play around with bold and italic text,
+
+    - make a couple of bullet points,
+
+    - embed a link.
+
+Remember that you can use the [Visual Editor](https://rstudio.github.io/visual-markdown-editing/) option in RStudio if it helps.
+
+- Adjust the output argument in the YAML header and render the document to the `results` folder in **HTML** format to see what it looks like. If there's time, try rendering to either the MDPI article template by itself or simultanous **HTML** & **Word** output.
+
+```
+Abstract
+
+Penguins are a group of flightless birds that are highly adapted to living in the harsh environments of the Southern Ocean. However, these iconic animals are facing numerous threats, including climate change, which is altering their habitats and affecting their survival. In this study, we assessed the impact of climate change on penguin populations by analyzing long-term data on penguin abundance, distribution, and breeding success. Our results show that changes in sea ice extent and ocean temperature have had a significant impact on the distribution and abundance of penguin populations, with some species experiencing declines in population size and reproductive success. These findings highlight the vulnerability of penguins to climate change and the urgent need for conservation efforts to protect these charismatic and important species. We suggest that future research should focus on developing effective management strategies to mitigate the impacts of climate change on penguin populations and their habitats.
+
+Introduction
+
+Penguins are awesome. They are birds but too cool to fly, so they rather swim. 
+
+Methods
+
+We collected data on three morphological traits of penguins: body mass, flipper length, and bill length. We measured these traits in a total of 200 individual penguins from three different species: Adelie, Gentoo, and Chinstrap.
+
+Results  
+
+Our data show significant differences in body mass, flipper length, and bill length among the three penguin species. Adelie penguins were found to be the smallest in body mass, flipper length, and bill length, while Chinstrap penguins were the largest in these traits. Gentoo penguins were intermediate in size for all three traits.
+ 
+Discussion
+
+Our findings suggest that the observed differences in penguin morphological traits may be related to differences in foraging behavior and habitat use among the species. Adelie penguins, for example, feed primarily on krill, which may require a smaller body size and bill length for efficient feeding. Chinstrap penguins, on the other hand, feed on a more diverse range of prey, including fish and krill, which may explain their larger size and longer bill length. Our study highlights the importance of considering species-specific adaptations and behaviors when studying penguin morphology and ecology.
+```

@@ -1,0 +1,5 @@
+# Welcome {.unnumbered}
+
+Open Science practices are becoming increasingly popular in the way research is conducted. This workshop provides a start for those interested in a transparent and reproducible workflow for communicating their research.
+
+We will dive into R Markdown and it's capabalities in writing a fully reproducible manuscript. 

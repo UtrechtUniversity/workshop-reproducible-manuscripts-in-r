@@ -1,0 +1,13 @@
+# Installation & Setup
+
+For this workshop, the following programs and packages should be installed and ready to use:
+
+- R
+- RStudio
+- The rticles package
+- The prereg package (optional)
+- The usethis package
+- The penguins package
+- The tidyverse package 
+- Zotero
+- Better BibTex for Zotero

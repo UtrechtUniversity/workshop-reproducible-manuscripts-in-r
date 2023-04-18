@@ -1,0 +1,23 @@
+# Introduction
+
+Writing a reproducible manuscript requires the use of three tools:
+
+- Version Control
+- Dynamic Document Generation
+- Dependency Management
+
+## What are the advantages?
+
+- One major benefit is the elimination of human error in copying and pasting results, as automated methods can update results, figures, and tables with major revisions. 
+
+_Using an automated method for scraping APA-formatted stats out of PDFs, Nuijten et al. (⊕2016) found that over 10% of p-values in published papers were inconsistent with the reported details of the statistical test, and 1.6% were what they called “grossly” inconsistent, e.g. difference between the p-value and the test statistic meant that one implied statistical significance and the other did not. Nearly half of all papers had errors in them._ 
+
+- The use of reproducible documents also allows for easy revisions and specification of desired figures and tables.
+
+_When revisions are requested, one might have to tweak tables and figures by hand constantly, leading to a major incentive never to rerun analyses because it would mean re-pasting and re-illustratoring all the numbers and figures in a paper._
+
+- Furthermore, computational reproducibility is promoted, which allows others to easily verify and replicate research findings. 
+
+While programming environments may seem counter-intuitive for writing papers, they ultimately prevent mistakes and save time.
+
+**Reference:** @RMarkdownWritingReproducible

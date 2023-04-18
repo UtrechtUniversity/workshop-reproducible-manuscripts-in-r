@@ -1,0 +1,26 @@
+project:
+  type: book
+  output-dir: ../docs
+
+book:
+  title: "Writing a Reproducible Manuscript in R"
+  author: "Research Data Management Support"
+  date: "17-4-2023"
+  chapters:
+    - index.qmd
+    - installation-and-setup.qmd
+    - introduction.qmd
+    - getting-started.qmd
+    - writing.qmd
+    - analysis.qmd
+    - referencing.qmd
+    - final-manuscript.qmd
+    - references.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: pulse
+
+
